@@ -180,8 +180,8 @@ describe('Theme plugin tests', function() {
 		cy.get('#country').select(user.country);
 		cy.get('#username').type(user.username, {delay: 0});
 		cy.get('#email').type(user.username + '@mailinator.com', {delay: 0});
-		cy.get('#password').type(user.username + user.username, {delay: 0});
-		cy.get('#password2').type(user.username + user.username, {delay: 0});
+		cy.get('#password').type(Cypress.getPassword(user.username), {delay: 0});
+		cy.get('#password2').type(Cypress.getPassword(user.username), {delay: 0});
 		cy.get('label[for="privacyConsent"]').click();
 		cy.get('label[for="checkbox-reviewer-interests"]').click();
 		cy.get('#reviewerInterests input').type('psychotherapy,neuroscience,neurobiology', {delay: 0});
@@ -195,7 +195,7 @@ describe('Theme plugin tests', function() {
 		cy.visit(path + '/' + 'login/signOut');
 		cy.url().should('include', 'login');
 		cy.get('#username').type('dbarnes', {delay: 0});
-		cy.get('#password').type('dbarnesdbarnes');
+		cy.get('#password').type(Cypress.getPassword('dbarnes'));
 		cy.get('button[type="submit"]').contains('Login').click();
 		cy.url().should('include', 'dashboard');
 	});
